@@ -2,21 +2,16 @@ const express = require('express');
 const path = require('path');
 const os = require('os');
 const fs = require('fs');
-const bodyParser = require('body-parser');
 const Busboy = require('busboy');
 
 const port = 3000;
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-// allows us to process submitted form data
-app.use(express.urlencoded({
-    extended: true
-}));
 
 app.post('/upload', function (req, res) {
     const busboy = new Busboy({ headers: req.headers });
